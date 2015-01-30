@@ -39,9 +39,13 @@ GEM
     arel (6.0.0)
     builder (3.2.2)
     erubis (2.7.0)
+    firebase (0.2.3)
+      httpclient
+      json
     globalid (0.3.0)
       activesupport (>= 4.1.0)
     hike (1.2.3)
+    httpclient (2.6.0.1)
     i18n (0.7.0)
     json (1.8.2)
     loofah (2.0.1)
@@ -106,6 +110,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  firebase
   pg
   rails (= 4.2.0)
   rails-api
