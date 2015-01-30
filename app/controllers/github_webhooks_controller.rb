@@ -4,6 +4,9 @@ class GithubWebhooksController < ActionController::Base
   # include GithubWebhook::Processor
 
   def create
+    base_uri = 'https://flickering-inferno-8924.firebaseio.com/'
+    firebase = Firebase::Client.new(base_uri)
+    response = firebase.push("issues-test", params)
     puts "hello"
     render json: params
   end

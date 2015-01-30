@@ -10,6 +10,7 @@ gem 'spring', :group => :development
 
 gem 'pg'
 
+gem 'firebase'
 
 
 # To use ActiveModel has_secure_password
