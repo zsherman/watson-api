@@ -1,15 +1,20 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: myapp_development
   pool: 5
-  username: watson
-  password:
+  database: watson_api_development
+  host: localhost
+  port: 5432
 
 test:
   adapter: postgresql
   encoding: unicode
-  database: myapp_test
   pool: 5
-  username: watson
-  password:
+  database: watson_api_test
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: watson_api_production
+  url: <%= ENV['DATABASE_URL'] %>
