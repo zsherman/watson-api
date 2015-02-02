@@ -13,6 +13,7 @@ class GithubWebhooksController < ActionController::Base
     issue = JSON.parse(json_issue)
     add_repo_and_org(issue)
     add_category(issue)
+    create_property_from_label(issue)
     response = firebase.update(parsed["issue"]["id"], issue)
     head :ok, content_type: "text/html"
   end
@@ -35,7 +36,24 @@ class GithubWebhooksController < ActionController::Base
       clean_category = category.delete('[]')
       issue["category"] = clean_category.downcase
     else 
-      issue["category"] = ""
+      issue["category"] = nil
+    end
+  end
+
+  def parse_label_type(issue, label)
+    label_types = ['needs', 'priority', 'size', 'status', 'team' ,'type']
+    issue["name"] = nil
+    label_type = label["name"].split(":").first
+    label_value = label["name"].split(":").last.strip
+    if label_types.include?(label_type)
+      issue[label_type] = label_value
+    end
+  end
+
+  def create_property_from_label(issue)
+    labels = issue["labels"]
+    labels.each do |label|
+      parse_label_type(issue, label)
     end
   end
 end
